@@ -13,7 +13,7 @@ import URLForm from './components/URLForm.vue';
 @Component({
   components: {
     HelloWorld,
-    URLForm
+    URLForm,
   },
 })
 export default class App extends Vue {}

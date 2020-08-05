@@ -8,20 +8,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class HelloWorld extends Vue {
-  private url!: String;
-  private errors: String[] = [];
-  
+  private url!: string;
+
+  private errors: string[] = [];
+
   public onSubmit(): void {
     if (!this.url) {
       this.errors.push('URL can not be empty!');
     }
 
     this.$emit('url-submitted', this.url);
-    this.url = "";
+    this.url = '';
   }
 }
 </script>
