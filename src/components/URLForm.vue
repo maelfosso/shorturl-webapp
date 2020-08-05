@@ -1,6 +1,15 @@
 <template>
   <div class="hello">
     <form @submit.prevent="onSubmit">
+      <div class="ui error message" v-show="errors.length != 0">
+        <i class="close icon"></i>
+        <div class="header">
+          Errors
+        </div>
+        <ul class="list">
+          <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+        </ul>
+      </div>
       <div class="ui action labeled input">
         <div class="ui label">
           http://
@@ -16,8 +25,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class HelloWorld extends Vue {
-  private url!: string;
+export default class URLForm extends Vue {
+  private url?: string = '';
 
   private errors: string[] = [];
 
