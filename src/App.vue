@@ -9,11 +9,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import ShortenedURLList from './components/ShortenedURLList.vue';
+import ShortenedURL from './components/ShortenedURL.vue';
 import URLForm from './components/URLForm.vue';
 
 @Component({
   components: {
     ShortenedURLList,
+    ShortenedURL,
     URLForm,
   },
 })

@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="url-creation">
     <form @submit.prevent="onSubmit">
       <div class="ui error message" v-show="errors.length != 0">
         <i class="close icon"></i>
@@ -34,10 +34,10 @@ export default class URLForm extends Vue {
   public onSubmit(): void {
     if (!this.url) {
       this.errors.push('URL can not be empty!');
+    } else {
+      this.$root.$emit('url-submitted', new URL(this.url || '', ''));
+      this.url = '';
     }
-
-    this.$root.$emit('url-submitted', new URL(this.url || '', ''));
-    this.url = '';
   }
 }
 </script>

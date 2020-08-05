@@ -1,23 +1,26 @@
 <template>
-  <div class="hello">
-    <div class="item" v-for="(url, index) in urls" :key="index">
-      <a class="header">{{ url.originalURL }}</a>
-      <div class="description">{{ url.shortenedURL }}</div>
-    </div>
+  <div class="urls-list">
+    <ShortenedURL v-for="(url, index) in urls" :key="index" :url="url"></ShortenedURL>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import ShortenedURL from './ShortenedURL.vue';
 import URL from '../models/url';
 
-@Component
+@Component({
+  components: {
+    ShortenedURL,
+  },
+})
 export default class ShortenedURLList extends Vue {
-  private urls: URL[] = [];
+  private urls: URL[] = [
+    new URL('gogle.com.ur', 'reach.fexdefe'),
+  ];
 
   mounted() {
     this.$root.$on('url-submitted', (url: URL) => {
-      console.log('url-submitted', url);
       this.urls.push(url);
     });
   }
