@@ -1,8 +1,13 @@
 <template>
   <div class="hello">
-    <form>
-      <input type="url" name="url" />
-      <button type="submit">Shorten</button>
+    <form @submit.prevent="onSubmit">
+      <div class="ui action labeled input">
+        <div class="ui label">
+          http://
+        </div>
+        <input type="text" placeholder="mysite.com" id="url" v-model="url">
+        <button class="ui button">Shorten</button>
+      </div>
     </form>
   </div>
 </template>
