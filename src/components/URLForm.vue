@@ -23,10 +23,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import URL from '../models/url';
 
 @Component
 export default class URLForm extends Vue {
-  private url?: string = '';
+  private url!: string;
 
   private errors: string[] = [];
 
@@ -35,7 +36,7 @@ export default class URLForm extends Vue {
       this.errors.push('URL can not be empty!');
     }
 
-    this.$emit('url-submitted', this.url);
+    this.$emit('url-submitted', new URL(this.url, ''));
     this.url = '';
   }
 }

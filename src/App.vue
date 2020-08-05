@@ -7,12 +7,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import ShortenedURLList from './components/ShortenedURLList.vue';
 import URLForm from './components/URLForm.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    ShortenedURLList,
     URLForm,
   },
 })

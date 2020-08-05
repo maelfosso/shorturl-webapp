@@ -1,20 +1,24 @@
 <template>
   <div class="hello">
-    
+    <div class="item" v-for="(url, index) in urls" :key="index">
+      <a class="header">{{ url.originalURL }}</a>
+      <div class="description">{{ url.shortenedURL }}</div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
+import URL from '../models/url';
 
 @Component
 export default class ShortenedURLList extends Vue {
-  private urls:any[] = [];
+  private urls: URL[] = [];
 
   mounted() {
-    this.$on('url-submitted', (shortenedURL:any) {
-      this.urls.push(shortenedURL);
-    })
+    this.$on('url-submitted', (url: URL) => {
+      this.urls.push(url);
+    });
   }
 }
 </script>
