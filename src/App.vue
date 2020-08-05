@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <URLForm />
-    <ShortenedURLList />
+    <div class="content">
+      <URLForm />
+      <ShortenedURLList />
+    </div>
   </div>
 </template>
 
@@ -30,5 +32,11 @@ export default class App extends Vue {}
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.content {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
 </style>

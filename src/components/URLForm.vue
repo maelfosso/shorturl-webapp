@@ -44,5 +44,7 @@ export default class URLForm extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.url-creation {
+  flex-grow: 1;
+}
 </style>
