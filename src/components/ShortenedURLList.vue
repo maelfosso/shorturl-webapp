@@ -16,7 +16,8 @@ export default class ShortenedURLList extends Vue {
   private urls: URL[] = [];
 
   mounted() {
-    this.$on('url-submitted', (url: URL) => {
+    this.$root.$on('url-submitted', (url: URL) => {
+      console.log('url-submitted', url);
       this.urls.push(url);
     });
   }
