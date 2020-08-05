@@ -1,18 +1,23 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <URLForm />
+    <div class="content">
+      <URLForm />
+      <ShortenedURLList />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import ShortenedURLList from './components/ShortenedURLList.vue';
+import ShortenedURL from './components/ShortenedURL.vue';
 import URLForm from './components/URLForm.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    ShortenedURLList,
+    ShortenedURL,
     URLForm,
   },
 })
@@ -27,5 +32,11 @@ export default class App extends Vue {}
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.content {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
 </style>
