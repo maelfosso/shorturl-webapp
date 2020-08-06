@@ -1,6 +1,9 @@
 <template>
   <div class="urls-list">
-    <ShortenedURL v-for="(url, index) in urls" :key="index" :url="url"></ShortenedURL>
+    <div class="ui large header">Shortened URLs</div>
+    <div class="ui list">
+      <ShortenedURL v-for="(url, index) in urls" :key="index" :url="url"></ShortenedURL>
+    </div>
   </div>
 </template>
 
@@ -30,6 +33,6 @@ export default class ShortenedURLList extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .urls-list {
-  flex-grow: 1;
+  flex: 1;
 }
 </style>
