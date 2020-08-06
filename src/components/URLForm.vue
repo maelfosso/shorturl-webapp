@@ -1,5 +1,6 @@
 <template>
   <div class="url-creation">
+    <div class="ui large header">Enter the url</div>
     <form @submit.prevent="onSubmit">
       <div class="ui error message" v-if="errors.length > 0">
         <div class="header">
@@ -13,7 +14,7 @@
         <div class="ui label">
           http://
         </div>
-        <input type="text" placeholder="mysite.com" id="url" v-model="url" v-on:keyup.enter="onSubmit">
+        <input type="text" placeholder="mysite.com" id="url" v-model="url" @focus="cleanErrors" v-on:keyup.enter="onSubmit">
         <button class="ui button">Shorten</button>
       </div>
     </form>
@@ -38,6 +39,10 @@ export default class URLForm extends Vue {
       this.url = '';
     }
   }
+
+  public cleanErrors(): void {
+    this.errors = [];
+  }
 }
 </script>
 
@@ -60,8 +65,10 @@ export default class URLForm extends Vue {
 
 @media only screen and (max-width: 900px){
   .url-creation {
+    margin-bottom: 1rem;
+  }
+  .url-creation .input {
     width: 100%;
-    /* flex-direction: column; */
   }
 }
 </style>

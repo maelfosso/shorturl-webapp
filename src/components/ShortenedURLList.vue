@@ -1,5 +1,6 @@
 <template>
   <div class="urls-list">
+    <div class="ui large header">Shortened URLs</div>
     <ShortenedURL v-for="(url, index) in urls" :key="index" :url="url"></ShortenedURL>
   </div>
 </template>

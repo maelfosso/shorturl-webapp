@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <div class="logo">
+      <img alt="Vue logo" src="./assets/logo.png">
+    </div>
     <div class="content">
       <URLForm />
       <ShortenedURLList />
@@ -29,10 +31,14 @@ export default class App extends Vue {}
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 900px;
+}
+.logo {
+  text-align: center;
 }
 .content {
   display: flex;
@@ -42,6 +48,9 @@ export default class App extends Vue {}
 }
 
 @media (max-width: 900px){
+  #app {
+    margin-top: 5px;
+  }
   .content {
     flex-direction: column;
     margin-left: 1em;
