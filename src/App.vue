@@ -29,14 +29,24 @@ export default class App extends Vue {}
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
+  max-width: 900px;
 }
 .content {
   display: flex;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+}
+
+@media (max-width: 900px){
+  .content {
+    flex-direction: column;
+    margin-left: 1em;
+    margin-right: 1em;
+    width: auto;
+  }
 }
 </style>

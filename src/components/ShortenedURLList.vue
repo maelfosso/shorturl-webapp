@@ -30,6 +30,6 @@ export default class ShortenedURLList extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .urls-list {
-  flex-grow: 1;
+  flex: 1;
 }
 </style>

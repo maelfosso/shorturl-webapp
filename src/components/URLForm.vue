@@ -1,8 +1,7 @@
 <template>
   <div class="url-creation">
     <form @submit.prevent="onSubmit">
-      <div class="ui error message" v-show="errors.length != 0">
-        <i class="close icon"></i>
+      <div class="ui error message" v-if="errors.length > 0">
         <div class="header">
           Errors
         </div>
@@ -14,7 +13,7 @@
         <div class="ui label">
           http://
         </div>
-        <input type="text" placeholder="mysite.com" id="url" v-model="url">
+        <input type="text" placeholder="mysite.com" id="url" v-model="url" v-on:keyup.enter="onSubmit">
         <button class="ui button">Shorten</button>
       </div>
     </form>
@@ -32,7 +31,7 @@ export default class URLForm extends Vue {
   private errors: string[] = [];
 
   public onSubmit(): void {
-    if (!this.url) {
+    if (this.url == '') {
       this.errors.push('URL can not be empty!');
     } else {
       this.$root.$emit('url-submitted', new URL(this.url || '', ''));
@@ -45,6 +44,24 @@ export default class URLForm extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .url-creation {
-  flex-grow: 1;
+  flex: 1;
+}
+
+@media only screen and (max-width: 400px) {
+  .url-creation .label {
+    display: none;
+  }
+  .url-creation input {
+    border-top-left-radius: 0.285714rem !important;
+    border-bottom-left-radius: 0.285714rem !important;
+    border-left-color: rgba(34, 36, 38, 0.15) !important;
+  }
+}
+
+@media only screen and (max-width: 900px){
+  .url-creation {
+    width: 100%;
+    /* flex-direction: column; */
+  }
 }
 </style>
