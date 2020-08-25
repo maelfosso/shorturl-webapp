@@ -51,8 +51,8 @@ export default class URLForm extends Vue {
         originalURL: this.url,
       }),
     }).then((res: Response) => res.json()).then((data: any) => {
-      console.log('FETCH SUCCESS: ', data.url);
       this.$root.$emit('url-submitted', data.url as URL);
+      this.url = '';
     }).catch((err: any) => {
       console.log('FETCH ERROR : ', err);
     });

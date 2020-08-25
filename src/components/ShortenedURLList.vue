@@ -23,10 +23,23 @@ export default class ShortenedURLList extends Vue {
   ];
 
   mounted() {
+    this.getURLs();
+
     this.$root.$on('url-submitted', (url: any) => {
-      // console.log(JSON.parse(JSON.stringify(data)));
-      console.log('SULL: ', url);
       this.urls.push(url);
+    });
+  }
+
+  public getURLs(): void {
+    fetch('http://localhost:3000/api/v1/urls', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res: Response) => res.json()).then((data: any) => {
+      this.urls = data.urls;
+    }).catch((err: any) => {
+      console.log('FETCH ERROR : ', err);
     });
   }
 }
