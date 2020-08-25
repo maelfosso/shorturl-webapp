@@ -14,7 +14,7 @@
         <div class="ui label">
           http://
         </div>
-        <input type="text" placeholder="mysite.com" id="url" 
+        <input type="text" placeholder="mysite.com" id="url"
           v-model="url" @focus="cleanErrors" v-on:keyup.enter="onSubmit"/>
         <button class="ui button">Shorten</button>
       </div>
