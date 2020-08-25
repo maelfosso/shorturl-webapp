@@ -19,11 +19,13 @@ import URL from '../models/url';
 })
 export default class ShortenedURLList extends Vue {
   private urls: URL[] = [
-    new URL('gogle.com.ur', 'reach.fexdefe'),
+    // new URL('gogle.com.ur', 'reach.fexdefe'),
   ];
 
   mounted() {
-    this.$root.$on('url-submitted', (url: URL) => {
+    this.$root.$on('url-submitted', (url: any) => {
+      // console.log(JSON.parse(JSON.stringify(data)));
+      console.log('SULL: ', url);
       this.urls.push(url);
     });
   }

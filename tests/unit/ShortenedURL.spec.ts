@@ -17,7 +17,7 @@ describe('ShortenedURL.vue', () => {
     
     expect(wrapper.props().url).toBe(url);
     expect(original.text()).toBe(url.originalURL);
-    expect(shortened).toContain(url.shortenedURL);
+    expect(shortened).toContain(url.shortenURL);
   });
 
 });

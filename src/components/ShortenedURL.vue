@@ -1,7 +1,7 @@
 <template>
   <div class="item">
     <div class="header">{{ url.originalURL }}</div>
-    <div>{{ url.shortenedURL }}</div>
+    <div>{{ url.shortenURL }}</div>
   </div>
 </template>
 
