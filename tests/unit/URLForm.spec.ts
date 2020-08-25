@@ -30,5 +30,7 @@ describe('URLForm.vue', () => {
 
     expect(wrapper.vm.$data.errors.length).toBeGreaterThan(0);
     expect(wrapper.find('.error').exists()).toBeTruthy();
+
+    expect(wrapper.find('button').attributes().disabled).toBeTruthy();
   });
 });
