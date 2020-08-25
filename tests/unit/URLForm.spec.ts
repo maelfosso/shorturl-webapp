@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, createWrapper } from '@vue/test-utils';
 import URLForm from '@/components/URLForm.vue';
 
 describe('URLForm.vue', () => {
@@ -20,7 +20,6 @@ describe('URLForm.vue', () => {
     const wrapper = shallowMount(URLForm, {});
     const form = wrapper.find('form');
     const input = wrapper.find('input#url');
-    console.log(input.html());
     await input.setValue('');
 
     expect((input.element as HTMLInputElement).value).toBe('');
@@ -28,7 +27,8 @@ describe('URLForm.vue', () => {
 
     await form.trigger("submit.prevent");
 
-    expect(wrapper.vm.$data.errors).toBeDefined();
+    expect(wrapper.vm.$data.errors).toBeTruthy();
+    expect(wrapper.vm.$data.errors).toContain("URL can not be empty");
     expect(wrapper.find('.error').exists()).toBeTruthy();
 
     expect(wrapper.find('button').attributes().disabled).toBeTruthy();
@@ -38,7 +38,6 @@ describe('URLForm.vue', () => {
     const wrapper = shallowMount(URLForm, {});
     const form = wrapper.find('form');
     const input = wrapper.find('input#url');
-    console.log(input.html());
     await input.setValue('gothere...');
 
     expect((input.element as HTMLInputElement).value).toBe('gothere...');
@@ -46,8 +45,28 @@ describe('URLForm.vue', () => {
 
     await form.trigger("submit.prevent");
 
-    expect(wrapper.vm.$data.errors).toBeDefined();
+    expect(wrapper.vm.$data.errors).toBeTruthy();
     expect(wrapper.vm.$data.errors).toContain("URL is invalid");
     expect(wrapper.find('.error').exists()).toBeTruthy();
   });
+
+  it('submit form if url is valid', async () => {
+    const wrapper = shallowMount(URLForm, {});
+    const form = wrapper.find('form');
+    const input = wrapper.find('input#url');
+    
+    await input.setValue('https://microk8s.io/docs/troubleshooting');
+
+    expect((input.element as HTMLInputElement).value).toBe('https://microk8s.io/docs/troubleshooting');
+    expect(wrapper.vm.$data.url).toBe('https://microk8s.io/docs/troubleshooting');
+
+    await form.trigger("submit.prevent");
+
+    expect(wrapper.vm.$data.errors).toBeFalsy();
+    expect(wrapper.find('.error').exists()).toBeFalsy();
+    
+    const rootWrapper = createWrapper(wrapper.vm.$root)
+    expect(rootWrapper.emitted('url-submitted')).toHaveLength(1);
+  });
+
 });
