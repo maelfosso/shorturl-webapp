@@ -9,9 +9,6 @@
         <div>{{ errors }}</div>
       </div>
       <div class="ui action labeled input">
-        <div class="ui label">
-          http://
-        </div>
         <input type="text" placeholder="http(s)://mysite.com/path-name/..." id="url"
           v-model="url" @focus="cleanErrors" v-on:keyup.enter="onSubmit"/>
         <button class="ui button" :disabled="url.length === 0">Shorten</button>
@@ -28,18 +25,16 @@ import URL from '../models/url';
 export default class URLForm extends Vue {
   private url?: string = '';
 
-  private errors: string = '';
+  private errors = '';
 
   public onSubmit(): void {
     if (this.url === '') {
       this.errors = 'URL can not be empty!';
+    } else if (!/^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/.test(this.url || '')) {
+      this.errors = 'Your URL is invalid!';
     } else {
-      if (! /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(this.url || '')) {
-        this.errors = 'Your URL is invalid!';
-      } else {
-        this.$root.$emit('url-submitted', new URL(this.url || '', ''));
-        this.url = '';
-      }
+      this.$root.$emit('url-submitted', new URL(this.url || '', ''));
+      this.url = '';
     }
   }
 
