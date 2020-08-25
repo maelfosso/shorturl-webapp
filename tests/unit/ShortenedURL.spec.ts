@@ -11,7 +11,13 @@ describe('ShortenedURL.vue', () => {
     const wrapper = shallowMount(ShortenedURL, {
       propsData: { url }
     });
-
+    const original = wrapper.find('.header')
+    const shortened = wrapper.text();
+    
+    
     expect(wrapper.props().url).toBe(url);
+    expect(original.text()).toBe(url.originalURL);
+    expect(shortened).toContain(url.shortenedURL);
   });
+
 });
