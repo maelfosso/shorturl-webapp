@@ -14,7 +14,7 @@ describe('ShortenedURLList.vue', () => {
     const shortenedURL = wrapper.findComponent(ShortenedURL);
     expect(shortenedURL.exists()).toBe(true);
     
-    // expect(wrapper.props().url).toBe(url);
-    // const urlForm = wrapper.findComponent(URLForm);
+    const title = wrapper.find('.ui.large.header')
+    expect(title.text()).toBe('Shortened URLs');
   });
 });
