@@ -28,9 +28,26 @@ describe('URLForm.vue', () => {
 
     await form.trigger("submit.prevent");
 
-    expect(wrapper.vm.$data.errors.length).toBeGreaterThan(0);
+    expect(wrapper.vm.$data.errors).toBeDefined();
     expect(wrapper.find('.error').exists()).toBeTruthy();
 
     expect(wrapper.find('button').attributes().disabled).toBeTruthy();
+  });
+
+  it('displays errors if url is not a valid URL', async () => {
+    const wrapper = shallowMount(URLForm, {});
+    const form = wrapper.find('form');
+    const input = wrapper.find('input#url');
+    console.log(input.html());
+    await input.setValue('gothere...');
+
+    expect((input.element as HTMLInputElement).value).toBe('gothere...');
+    expect(wrapper.vm.$data.url).toBe('gothere...');
+
+    await form.trigger("submit.prevent");
+
+    expect(wrapper.vm.$data.errors).toBeDefined();
+    expect(wrapper.vm.$data.errors).toContain("URL is invalid");
+    expect(wrapper.find('.error').exists()).toBeTruthy();
   });
 });
