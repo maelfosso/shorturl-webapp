@@ -31,7 +31,7 @@ export default class ShortenedURLList extends Vue {
   }
 
   public getURLs(): void {
-    fetch('http://localhost:3000/api/v1/urls', {
+    fetch('http://localhost:4000/api/v1/urls', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

@@ -42,7 +42,7 @@ export default class URLForm extends Vue {
   }
 
   public postURL(): void {
-    fetch('http://localhost:3000/api/v1/urls', {
+    fetch('http://localhost:4000/api/v1/urls', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,12 +50,25 @@ export default class URLForm extends Vue {
       body: JSON.stringify({
         originalURL: this.url,
       }),
+    }).then((res: Response) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      throw res;
     }).then((res: Response) => res.json()).then((data: any) => {
       this.$root.$emit('url-submitted', data.url as URL);
       this.url = '';
-    }).catch((err: any) => {
-      console.log('FETCH ERROR : ', err);
-    });
+    })
+      .catch((err) => {
+        if (err.status === 406) {
+          this.errors = 'URL already shortens';
+        } else if (err.status === 422) {
+          this.errors = 'Invalid original URL';
+        } else {
+          this.errors = 'An error occurered. Try later';
+        }
+      });
   }
 }
 </script>
