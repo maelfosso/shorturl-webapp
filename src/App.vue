@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="logo">
-      <img alt="Vue logo" src="./assets/logo.png">
+      <h1>Shorten your URL</h1>
     </div>
     <div class="content">
       <URLForm />

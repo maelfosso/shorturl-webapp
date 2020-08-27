@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-// import URL from '../models/url';
 
 @Component
 export default class URLForm extends Vue {
@@ -42,7 +41,7 @@ export default class URLForm extends Vue {
   }
 
   public postURL(): void {
-    fetch('http://localhost:4000/api/v1/urls', {
+    fetch(`${process.env.VUE_APP_API_URL}/api/v1/urls`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

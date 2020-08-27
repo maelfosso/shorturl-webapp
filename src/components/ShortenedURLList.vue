@@ -37,7 +37,7 @@ export default class ShortenedURLList extends Vue {
   }
 
   public getURLs(): void {
-    fetch('http://localhost:4000/api/v1/urls', {
+    fetch(`${process.env.VUE_APP_API_URL}/api/v1/urls`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export default class ShortenedURLList extends Vue {
     }).then((data: any) => {
       this.urls = data.urls;
     }).catch((err: any) => {
-      this.errors = "An error occurred. Please, try again later."
+      this.errors = 'An error occurred. Please, try again later.';
     });
   }
 }
