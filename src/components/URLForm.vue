@@ -1,17 +1,17 @@
 <template>
   <div class="url-creation">
     <div class="ui large header">Enter the url</div>
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit" class="ui form" :class="{ error : errors }">
       <div class="ui error message" v-if="errors">
         <div class="header">
           Errors
         </div>
         <div>{{ errors }}</div>
       </div>
-      <div class="ui action labeled input">
+      <div class="ui action input">
         <input type="text" placeholder="http(s)://mysite.com/path-name/..." id="url"
           v-model="url" @focus="cleanErrors" v-on:keyup.enter="onSubmit"/>
-        <button class="ui button" :disabled="url.length === 0">Shorten</button>
+        <button class="ui button mini" :disabled="url.length === 0">Shorten</button>
       </div>
     </form>
   </div>

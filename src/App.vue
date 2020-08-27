@@ -44,7 +44,10 @@ export default class App extends Vue {}
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 90%;
+}
+.content > div {
+  margin: 1em;
 }
 
 @media (max-width: 900px){
