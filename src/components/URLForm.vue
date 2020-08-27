@@ -1,17 +1,17 @@
 <template>
   <div class="url-creation">
     <div class="ui large header">Enter the url</div>
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit" class="ui form" :class="{ error : errors }">
       <div class="ui error message" v-if="errors">
         <div class="header">
           Errors
         </div>
         <div>{{ errors }}</div>
       </div>
-      <div class="ui action labeled input">
+      <div class="ui action input">
         <input type="text" placeholder="http(s)://mysite.com/path-name/..." id="url"
           v-model="url" @focus="cleanErrors" v-on:keyup.enter="onSubmit"/>
-        <button class="ui button" :disabled="url.length === 0">Shorten</button>
+        <button class="ui button mini" :disabled="url.length === 0">Shorten</button>
       </div>
     </form>
   </div>
@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import URL from '../models/url';
 
 @Component
 export default class URLForm extends Vue {
@@ -33,13 +32,42 @@ export default class URLForm extends Vue {
     } else if (!/^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/.test(this.url || '')) {
       this.errors = 'Your URL is invalid!';
     } else {
-      this.$root.$emit('url-submitted', new URL(this.url || '', ''));
-      this.url = '';
+      this.postURL();
     }
   }
 
   public cleanErrors(): void {
     this.errors = '';
+  }
+
+  public postURL(): void {
+    fetch(`${process.env.VUE_APP_API_URL}/api/v1/urls`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        originalURL: this.url,
+      }),
+    }).then((res: Response) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      throw res;
+    }).then((res: Response) => res.json()).then((data: any) => {
+      this.$root.$emit('url-submitted', data.url as URL);
+      this.url = '';
+    })
+      .catch((err) => {
+        if (err.status === 406) {
+          this.errors = 'URL already shortens';
+        } else if (err.status === 422) {
+          this.errors = 'Invalid original URL';
+        } else {
+          this.errors = 'An error occurered. Try later';
+        }
+      });
   }
 }
 </script>

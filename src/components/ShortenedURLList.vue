@@ -1,6 +1,12 @@
 <template>
   <div class="urls-list">
     <div class="ui large header">Shortened URLs</div>
+    <div class="ui error message" v-if="errors">
+      <div class="header">
+        Errors
+      </div>
+      <div>{{ errors }}</div>
+    </div>
     <div class="ui list">
       <ShortenedURL v-for="(url, index) in urls" :key="index" :url="url"></ShortenedURL>
     </div>
@@ -18,13 +24,34 @@ import URL from '../models/url';
   },
 })
 export default class ShortenedURLList extends Vue {
-  private urls: URL[] = [
-    new URL('gogle.com.ur', 'reach.fexdefe'),
-  ];
+  private urls: URL[] = [];
+
+  private errors = '';
 
   mounted() {
-    this.$root.$on('url-submitted', (url: URL) => {
+    this.getURLs();
+
+    this.$root.$on('url-submitted', (url: any) => {
       this.urls.push(url);
+    });
+  }
+
+  public getURLs(): void {
+    fetch(`${process.env.VUE_APP_API_URL}/api/v1/urls`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res: Response) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      throw res;
+    }).then((data: any) => {
+      this.urls = data.urls;
+    }).catch((err: any) => {
+      this.errors = 'An error occurred. Please, try again later.';
     });
   }
 }
