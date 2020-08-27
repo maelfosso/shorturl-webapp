@@ -1,6 +1,12 @@
 <template>
   <div class="urls-list">
     <div class="ui large header">Shortened URLs</div>
+    <div class="ui error message" v-if="errors">
+      <div class="header">
+        Errors
+      </div>
+      <div>{{ errors }}</div>
+    </div>
     <div class="ui list">
       <ShortenedURL v-for="(url, index) in urls" :key="index" :url="url"></ShortenedURL>
     </div>
@@ -18,9 +24,9 @@ import URL from '../models/url';
   },
 })
 export default class ShortenedURLList extends Vue {
-  private urls: URL[] = [
-    // new URL('gogle.com.ur', 'reach.fexdefe'),
-  ];
+  private urls: URL[] = [];
+
+  private errors = '';
 
   mounted() {
     this.getURLs();
@@ -36,10 +42,16 @@ export default class ShortenedURLList extends Vue {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then((res: Response) => res.json()).then((data: any) => {
+    }).then((res: Response) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      throw res;
+    }).then((data: any) => {
       this.urls = data.urls;
     }).catch((err: any) => {
-      console.log('FETCH ERROR : ', err);
+      this.errors = "An error occurred. Please, try again later."
     });
   }
 }
