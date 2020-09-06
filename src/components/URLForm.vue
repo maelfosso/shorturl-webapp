@@ -55,11 +55,12 @@ export default class URLForm extends Vue {
       }
 
       throw res;
-    }).then((res: Response) => res.json()).then((data: any) => {
+    }).then((data) => {
       this.$root.$emit('url-submitted', data.url as URL);
       this.url = '';
     })
       .catch((err) => {
+        console.log(err);
         if (err.status === 406) {
           this.errors = 'URL already shortens';
         } else if (err.status === 422) {
