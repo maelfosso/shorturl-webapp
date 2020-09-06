@@ -48,9 +48,9 @@ export default class ShortenedURLList extends Vue {
       }
 
       throw res;
-    }).then((data: any) => {
+    }).then((data) => {
       this.urls = data.urls;
-    }).catch((err: any) => {
+    }).catch((err) => {
       this.errors = 'An error occurred. Please, try again later.';
     });
   }
