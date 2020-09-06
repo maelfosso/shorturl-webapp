@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div class="logo">
+      <h1>Shorten your URL</h1>
+    </div>
+    <div class="content">
+      <URLForm />
+      <ShortenedURLList />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import ShortenedURLList from './components/ShortenedURLList.vue';
+import ShortenedURL from './components/ShortenedURL.vue';
+import URLForm from './components/URLForm.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    ShortenedURLList,
+    ShortenedURL,
+    URLForm,
   },
 })
 export default class App extends Vue {}
@@ -22,8 +31,34 @@ export default class App extends Vue {}
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px;
+}
+.logo {
+  text-align: center;
+}
+.content {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+.content > div {
+  margin: 1em;
+}
+
+@media (max-width: 900px){
+  #app {
+    margin-top: 5px;
+  }
+  .content {
+    flex-direction: column;
+    margin-left: 1em;
+    margin-right: 1em;
+    width: auto;
+  }
 }
 </style>

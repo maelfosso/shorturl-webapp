@@ -1,24 +1,63 @@
-# app
+# ShortURL - Webapp (Frontend)
 
-## Project setup
+## Description
+
+Front-end image for a small Shorturl APP build with Vue.js, Node.js and MongoDB.
+
+## Build With
+
+- Node.js v12.18.3
+- Typescript v3.6.3
+- Docker
+
+## Features
+
+- Create a short URL
+- Get all the short URLs
+
+## Live Demo
+
+TBA
+
+## Docker
+
+This project is Frontend of a whole project. To run them all it's easy to use Docker.
+
+Jump into that repository `https://github.com/maelfosso/startup-files.git` and follow the described steps to run them all as one.
+
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+Node.js v12 - Typescript v3.6 
+
+### Setup
+
+Clone the repository
 ```
-yarn install
+git clone https://github.com/maelfosso/shorturl-webapp.git 
 ```
 
-### Compiles and hot-reloads for development
+Change the directory
 ```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
+cd shorturl-webapp
 ```
 
-### Lints and fixes files
+Start it
 ```
-yarn lint
+npm install
+npm run serve
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Run tests
+
+```
+npm run test:unit
+```
+
+## Authors
+ 
+- **Mael FOSSO** : [Github](https://github.com/maelfosso) - [LinkedIn](https://linkedin.com/in/mael-fosso-650b6346/)
+
