@@ -10,6 +10,11 @@ Front-end image for a small Shorturl APP build with Vue.js, Node.js and MongoDB.
 - Typescript v3.6.3
 - Docker
 
+## Features
+
+- Create a short URL
+- Get all the short URLs
+
 ## Live Demo
 
 TBA
